@@ -105,6 +105,7 @@ module datapath_tb();
 	#5
 	sim_clk = 0;
 	#2
+	sim_clk = 1;
 
 	$display("Read R3 Output is %b, we expected %b", sim_datapath_out, 16'd16);
 	
