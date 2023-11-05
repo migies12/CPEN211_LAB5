@@ -15,7 +15,7 @@ module datapath(write, vsel, loada, loadb, asel, bsel, loadc, loads, datapath_in
 
   assign data_in = vsel ? datapath_in: datapath_out;
 
-  regfile registers (.data_in(data_in), .writenum(writenum),
+  regfile REGFILE (.data_in(data_in), .writenum(writenum),
 			 .write(write), .readnum(readnum), .clk(clk), .data_out(data_out));
 
   vDFF #(16) A (.clk(clk & loada), .D(data_out), .Q(A_out));
