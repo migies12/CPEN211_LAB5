@@ -163,10 +163,31 @@ endmodule
 // may want to look at the code in Figure 7.20 and 7.21 in Dally but note this
 // code will not work with the DE1-SoC because the order of segments used in
 // the book is not the same as on the DE1-SoC (see comments below).
+`define H0 7'b1000000
+`define H1 7'b1111001
+`define H2 7'b0100100
+`define H3 7'b0110000
+`define H4 7'b0011001
+`define H5 7'b0010010
+`define H6 7'b0000010
+`define H7 7'b1111000
+`define H8 7'b0000000
+`define H9 7'b0010000
+`define HA 7'b0001000
+`define HB 7'b0000011
+`define HC 7'b0000110
+`define HD 7'b0100001
+`define HE 7'b0000110
+`define HF 7'b0001110
+`define OFF 7'b1111111
+
+
 
 module sseg(in,segs);
+
+
   input [3:0] in;
-  output [6:0] segs;
+  output reg [6:0] segs;
 
   // NOTE: The code for sseg below is not complete: You can use your code from
   // Lab4 to fill this in or code from someone else's Lab4.  
@@ -213,6 +234,26 @@ module sseg(in,segs);
   //            14 | E
   //            15 | F
 
-  assign segs = 7'b0001110;  // this will output "F" 
-
+  always @(in) begin
+    case(in)
+      3'd0: segs = `H0;
+      3'd1: segs = `H1;
+      3'd2: segs = `H2;
+      3'd3: segs = `H3;
+      3'd4: segs = `H4;
+      3'd5: segs = `H5;
+      3'd6: segs = `H6;
+      3'd7: segs = `H7;
+      3'd8: segs = `H8;
+      3'd9: segs = `H9;
+      3'd10: segs = `HA;
+      3'd11: segs = `HB;
+      3'd12: segs = `HC;
+      3'd13: segs = `HD;
+      3'd14: segs = `HE;
+      3'd15: segs = `HF;
+      default: segs = `OFF;
+    endcase
+  end
+  
 endmodule

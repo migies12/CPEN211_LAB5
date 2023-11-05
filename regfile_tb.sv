@@ -1,6 +1,6 @@
 
 
-module tb_regfile();
+module regfile_tb();
 
   
    // Inputs
@@ -13,7 +13,7 @@ module tb_regfile();
     wire [15:0] sim_data_out;
     
     // Instantiate the module under test
-    regfile uut (
+    regfile DUT (
         .data_in(sim_data_in),
         .writenum(sim_writenum),
         .write(sim_write),

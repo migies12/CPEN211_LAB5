@@ -28,7 +28,7 @@ reg [1:0] sim_shift;
 wire [15:0] sim_sout;
 reg err;
 
-shifter dut(.in(sim_in),.shift(sim_shift),.sout(sim_sout));
+shifter DUT(.in(sim_in),.shift(sim_shift),.sout(sim_sout));
 
 initial begin 
 err = 0;

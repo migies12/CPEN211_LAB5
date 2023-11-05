@@ -24,19 +24,6 @@ reg regSel[2:0];
 always_ff @(posedge clk) begin
 
 
-//USe if needed
-//reg decoded = 
-//	  (writenum == 3'b000) ? IV0 : //IV stands for input value
-//          (writenum == 3'b001) ? IV1 :
-//          (writenum == 3'b010) ? IV2 :
-//          (writenum == 3'b011) ? IV3 :
-//          (writenum == 3'b100) ? IV4 :
-//          (writenum == 3'b101) ? IV5 :
-//          (writenum == 3'b110) ? IV6 :
-//          (writenum == 3'b111) ? IV7 :
-//          8'b00000000;
-
-
 
 if (write) begin
 case(writenum)

@@ -28,7 +28,7 @@ wire [15:0] sim_out;
 wire sim_Z;
 reg err;
 
-ALU dut(.Ain(sim_Ain),.Bin(sim_Bin),.ALUop(sim_ALUop),.out(sim_out),.Z(sim_Z));
+ALU DUT(.Ain(sim_Ain),.Bin(sim_Bin),.ALUop(sim_ALUop),.out(sim_out),.Z(sim_Z));
 
 initial begin
 err = 0;
