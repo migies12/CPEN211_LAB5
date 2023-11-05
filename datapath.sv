@@ -18,10 +18,10 @@ module datapath(write, vsel, loada, loadb, asel, bsel, loadc, loads, datapath_in
   regfile registers (.data_in(data_in), .writenum(writenum),
 			 .write(write), .readnum(readnum), .clk(clk), .data_out(data_out));
 
-  vDFF #(16) A (.clk(clk), .D(data_out), .Q(A_out));
-  vDFF #(16) B (.clk(clk), .D(data_out), .Q(B_out));
-  vDFF #(16) C (.clk(clk), .D(ALU_out), .Q(datapath_out));
-  vDFF status (.clk(clk), .D(Z), .Q(Z_out));
+  vDFF #(16) A (.clk(clk & loada), .D(data_out), .Q(A_out));
+  vDFF #(16) B (.clk(clk & loadb), .D(data_out), .Q(B_out));
+  vDFF #(16) C (.clk(clk & loadc), .D(ALU_out), .Q(datapath_out));
+  vDFF status (.clk(clk & loads), .D(Z), .Q(Z_out));
 
  shifter shifter (.in(B_out), .shift(shift), .sout(sout));
 

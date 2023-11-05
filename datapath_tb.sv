@@ -113,7 +113,7 @@ $display("Test #1: Adding 2 and 7 left shifted by 1 (14) which outputs 10000 usi
 
 	$display("Read R3 Output is %b, we expected %b", sim_datapath_out, 16'd16);
 	
-	if(~(sim_datapath_out != 16'd16)) err = 1;
+	if(~(sim_datapath_out == 16'd16)) err = 1;
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //TEST #2: Subtracting 13 and 4 right shifted by 1 (14) which outputs 1011 in R2 and R0
@@ -185,11 +185,11 @@ $display("TEST #2: Subtracting 13 and 4 right shifted by 1 (14) which outputs 10
 
 	$display("Read datapath out, Output is %b, we expected %b", sim_datapath_out, 16'd11);
 
-	if(~(sim_datapath_out != 16'd11)) err = 1;
+	if((sim_datapath_out != 16'd11)) err = 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//Test #3: ANDING Ain = 23045 and Bin = 19213
-	$display("TEST #2: ANDING Ain = 23045 and Bin = 19213");
+	$display("TEST #3: ANDING Ain = 23045 and Bin = 19213");
 	
 	//Write 23045 to R4
 	sim_clk = 0;
@@ -232,6 +232,7 @@ $display("TEST #2: Subtracting 13 and 4 right shifted by 1 (14) which outputs 10
 	sim_loada = 0;
 	sim_loadb = 1;
 	sim_bsel = 0;
+	sim_shift = 2'b00;
 	sim_ALUop = 2'b10; //And
 	sim_loads = 0;
 	
@@ -256,46 +257,45 @@ $display("TEST #2: Subtracting 13 and 4 right shifted by 1 (14) which outputs 10
 
 	$display("Read datapath out, Output is %b, we expected %b", sim_datapath_out, 16'd23045 & 16'd19213);
 
-	if(~(sim_datapath_out != 16'd23045 & 16'd19213)) err = 1;
+	if((sim_datapath_out != (16'd23045 & 16'd19213))) err = 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//Test #4: Notting Bin: 1
-	$display("TEST #2: Notting Bin: 1");
+	$display("TEST #4: Notting Bin: 1");
 	
-	//Write 1 to R5
+	//Write 1111111100000101 to R5
 	sim_clk = 0;
 	#2;
     sim_write = 1'b1;
 	sim_vsel = 1;	  //mux select Dataath_in as input
 	sim_writenum = 3'b101; //Write to R5
-	sim_datapath_in = 16'd1; //16 bit value of 1 in dec
+	sim_datapath_in = 16'b1111111100000101; //16 bit value of 1 in dec
 	sim_clk = 1'b1;
-
     #5;
 	sim_clk = 0;
 	#2;
 
-	//Load R5 to a
+	
+	//Load R5 to b
 	sim_write = 1'b0;
 	sim_readnum = 3'b101;
-	sim_loada = 1;
-	sim_loadb = 0;
+	sim_loada = 0;
+	sim_loadb = 1;
 	sim_loadc = 0;
 	sim_asel = 0;
-	sim_clk = 1;
 	
-
+	sim_clk = 1;
 	#5;
 	sim_clk = 0;
 	#2;
 
-	//Load R1 to b
-
+	sim_loadb = 0;
+	sim_bsel = 0;
+	sim_shift = 2'b11;
 	sim_ALUop = 2'b11; //not
 	sim_loads = 0;
 	
 	sim_clk = 1;
-	
 	#5;
 	sim_clk = 0;
 	#2;
@@ -314,9 +314,9 @@ $display("TEST #2: Subtracting 13 and 4 right shifted by 1 (14) which outputs 10
 	#2;
 	sim_clk = 1;
 
-	$display("Read datapath out, Output is %b, we expected %b", sim_datapath_out, ~16'd1);
+	$display("Read datapath out, Output is %b, we expected %b", sim_datapath_out, 16'b0000000001111101);
 
-	if(~(sim_datapath_out != ~16'd1)) err = 1;
+	if((sim_datapath_out != 16'b0000000001111101)) err = 1;
 
     end
 
