@@ -1,0 +1,4 @@
+Partner 1: Wrote the register, register_tb, and datapath, some of datapath_tb
+Partner 2: Alu, alu_tb, shifter, shifter_tb, majority datapath_tb
+Both partners collarborated on debugging and helped eachother find bugs in our testbenches and other files. 
+Both partners made waveforms and brainstormed different testing methods. 
